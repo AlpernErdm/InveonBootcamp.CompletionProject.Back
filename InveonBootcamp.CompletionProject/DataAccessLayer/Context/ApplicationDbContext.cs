@@ -26,7 +26,7 @@ namespace InveonBootcamp.CompletionProject.DataAccessLayer.Context
                 .WithMany(c => c.OrderCourses)
                 .HasForeignKey(oc => oc.CourseId);
 
-            // Kurs fiyatı için hassasiyet ve ölçek belirleme
+          
             modelBuilder.Entity<Course>()
                 .Property(c => c.Price)
                 .HasColumnType("decimal(18,2)");

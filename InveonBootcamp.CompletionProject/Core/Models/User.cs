@@ -7,6 +7,6 @@
         public string Password { get; set; } = default!;
         public string PhoneNumber { get; set; } = default!;
         public string? Address { get; set; }
-        public ICollection<Order> Orders { get; set; } // Navigasyon Özelliği
+        public ICollection<Order> Orders { get; set; }
     }
 }
