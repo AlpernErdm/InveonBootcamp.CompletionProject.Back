@@ -1,0 +1,6 @@
+@InveonBootcamp.CompletionProject_HostAddress = http://localhost:5149
+
+GET {{InveonBootcamp.CompletionProject_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
