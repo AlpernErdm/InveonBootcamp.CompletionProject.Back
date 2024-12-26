@@ -26,7 +26,6 @@ namespace InveonBootcamp.CompletionProject.DataAccessLayer.Context
                 .WithMany(c => c.OrderCourses)
                 .HasForeignKey(oc => oc.CourseId);
 
-          
             modelBuilder.Entity<Course>()
                 .Property(c => c.Price)
                 .HasColumnType("decimal(18,2)");
@@ -35,6 +34,16 @@ namespace InveonBootcamp.CompletionProject.DataAccessLayer.Context
                 .HasOne(o => o.User)
                 .WithMany(u => u.Orders)
                 .HasForeignKey(o => o.UserId);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Payment)
+                .WithOne(p => p.Order)
+                .HasForeignKey<Payment>(p => p.OrderId);
+
+            // Payment Amount için hassasiyet ve ölçek belirleme
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.Amount)
+                .HasColumnType("decimal(18,2)");
 
             base.OnModelCreating(modelBuilder);
         }
