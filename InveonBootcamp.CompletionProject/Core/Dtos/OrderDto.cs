@@ -1,4 +1,10 @@
 ﻿namespace InveonBootcamp.CompletionProject.Core.Dtos
 {
-    public record OrderDto(int Id, int UserId, DateTime OrderDate, List<OrderCourseDto> OrderCourses);
+    public record OrderDto(
+      int Id,
+      Guid UserId,
+      DateTime OrderDate,
+      ICollection<OrderCourseDto> OrderCourses,
+      PaymentDto Payment
+  );
 }

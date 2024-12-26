@@ -1,8 +1,7 @@
-﻿namespace InveonBootcamp.CompletionProject.Core.Dtos
+﻿namespace InveonBootcamp.CompletionProject.Core.Dtos.CreateDtos
 {
-    public class UserDto
+    public class CreateUserDto
     {
-        public Guid Id { get; set; }
         public string Username { get; set; } = default!;
         public string Password { get; set; } = default!;
         public string Role { get; set; } = default!;

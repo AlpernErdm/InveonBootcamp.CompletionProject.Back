@@ -4,8 +4,9 @@
     {
         public int Id { get; set; }
         public Guid UserId { get; set; }
-        public User User { get; set; }
-        public DateTime OrderDate { get; set; }
-        public ICollection<OrderCourse> OrderCourses { get; set; }
+        public User User { get; set; } = default!;
+        public DateTime OrderDate { get; set; } = DateTime.UtcNow;
+        public ICollection<OrderCourse> OrderCourses { get; set; } = new List<OrderCourse>();
+        public Payment Payment { get; set; } = default!;
     }
 }
