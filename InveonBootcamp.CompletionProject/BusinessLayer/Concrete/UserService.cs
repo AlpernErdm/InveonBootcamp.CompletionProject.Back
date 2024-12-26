@@ -30,14 +30,21 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
             var user = await _unitOfWork.Users.GetByIdAsync(id);
             return _mapper.Map<UserDto>(user);
         }
+        public async Task<User> AuthenticateUserAsync(string username, string password)
+        {
+            var user = await _unitOfWork.Users
+                .GetAsync(u => u.Username == username && u.Password == password);
+
+            return user;
+        }
         public async Task<UserDto> AddUserAsync(CreateUserDto userForCreateDto)
         {
             var user = _mapper.Map<User>(userForCreateDto);
-            user.Id = Guid.NewGuid(); // Yeni oluşturulan kullanıcının ID'sini burada manuel olarak belirtiyoruz.
+            user.Id = Guid.NewGuid(); 
             await _unitOfWork.Users.AddAsync(user);
             await _unitOfWork.CompleteAsync();
 
-            var userDto = _mapper.Map<UserDto>(user); // Eklenen kullanıcıyı UserDto olarak dönelim
+            var userDto = _mapper.Map<UserDto>(user);
             return userDto;
         }
 

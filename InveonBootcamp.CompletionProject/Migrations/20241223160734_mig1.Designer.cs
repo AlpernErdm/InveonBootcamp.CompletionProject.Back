@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InveonBootcamp.CompletionProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241223115320_mig1")]
+    [Migration("20241223160734_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -97,6 +97,9 @@ namespace InveonBootcamp.CompletionProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -104,12 +107,12 @@ namespace InveonBootcamp.CompletionProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PaymentStatus")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderId")
+                        .IsUnique();
 
                     b.ToTable("Payments");
                 });
@@ -173,8 +176,8 @@ namespace InveonBootcamp.CompletionProject.Migrations
             modelBuilder.Entity("InveonBootcamp.CompletionProject.Core.Models.Payment", b =>
                 {
                     b.HasOne("InveonBootcamp.CompletionProject.Core.Models.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
+                        .WithOne("Payment")
+                        .HasForeignKey("InveonBootcamp.CompletionProject.Core.Models.Payment", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -189,6 +192,9 @@ namespace InveonBootcamp.CompletionProject.Migrations
             modelBuilder.Entity("InveonBootcamp.CompletionProject.Core.Models.Order", b =>
                 {
                     b.Navigation("OrderCourses");
+
+                    b.Navigation("Payment")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("InveonBootcamp.CompletionProject.Core.Models.User", b =>

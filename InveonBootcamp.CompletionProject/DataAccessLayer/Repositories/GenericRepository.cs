@@ -52,5 +52,9 @@ namespace InveonBootcamp.CompletionProject.DataAccessLayer.Repositories
         {
             _context.Set<T>().Update(entity);
         }
+        public async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().FirstOrDefaultAsync(predicate);
+        }
     }
 }
