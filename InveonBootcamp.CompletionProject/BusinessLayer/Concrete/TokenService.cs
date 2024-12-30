@@ -26,7 +26,7 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
                     issuer: configuration["AppSettings:ValidIssuer"],
                     audience: configuration["AppSettings:ValidAudience"],
                     claims: new List<Claim> {
-                    new Claim("userName", request.Username)
+                    new Claim("Email", request.Email)
                     },
                     notBefore: dateTimeNow,
                     expires: dateTimeNow.Add(TimeSpan.FromMinutes(500)),

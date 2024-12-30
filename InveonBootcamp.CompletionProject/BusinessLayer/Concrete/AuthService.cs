@@ -22,16 +22,16 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password))
+            if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
             {
-                throw new ArgumentNullException("Username and Password cannot be empty");
+                throw new ArgumentNullException("Email and Password cannot be empty");
             }
 
-            var user = await _userService.AuthenticateUserAsync(request.Username, request.Password);
+            var user = await _userService.AuthenticateUserAsync(request.Email, request.Password);
 
             if (user != null)
             {
-                var generatedTokenInformation = await _tokenService.GenerateToken(new GenerateTokenRequest { Username = request.Username });
+                var generatedTokenInformation = await _tokenService.GenerateToken(new GenerateTokenRequest { Email = request.Email });
                 return (true, generatedTokenInformation.Token, generatedTokenInformation.TokenExpireDate);
             }
 

@@ -30,10 +30,10 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
             var user = await _unitOfWork.Users.GetByIdAsync(id);
             return _mapper.Map<UserDto>(user);
         }
-        public async Task<User> AuthenticateUserAsync(string username, string password)
+        public async Task<User> AuthenticateUserAsync(string email, string password)
         {
             var user = await _unitOfWork.Users
-                .GetAsync(u => u.Username == username && u.Password == password);
+                .GetAsync(u => u.Email == email && u.Password == password);
 
             return user;
         }

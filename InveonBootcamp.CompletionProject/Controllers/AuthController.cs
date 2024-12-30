@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InveonBootcamp.CompletionProject.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : ControllerBase
     {

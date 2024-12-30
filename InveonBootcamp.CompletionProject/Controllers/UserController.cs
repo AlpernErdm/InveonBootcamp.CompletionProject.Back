@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InveonBootcamp.CompletionProject.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -38,8 +38,8 @@ namespace InveonBootcamp.CompletionProject.Controllers
         }
 
         [HttpPost]
-        [Authorize]
-        public async Task<ActionResult<UserDto>> PostUser(CreateUserDto createUserDto)
+        //[Authorize]
+        public async Task<ActionResult<UserDto>> RegisterUser(CreateUserDto createUserDto)
         {
             var userDto = await _userService.AddUserAsync(createUserDto);
             return CreatedAtAction(nameof(GetUser), new { id = userDto.Id }, userDto);
