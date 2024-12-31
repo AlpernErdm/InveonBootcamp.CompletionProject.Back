@@ -11,8 +11,11 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Abstract
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
         Task<UserDto> GetUserByIdAsync(Guid id);
         Task<UserDto> AddUserAsync(CreateUserDto userForCreateDto);
-        Task<UserDto> UpdateUserAsync(int id, UpdateUserDto updateUserDto);
+        Task<UserDto> UpdateUserAsync(Guid id, UpdateUserDto updateUserDto);
         Task DeleteUserAsync(Guid id);
-        Task<User> AuthenticateUserAsync(string username, string password); 
+        Task<User> AuthenticateUserAsync(string username, string password);
+        Task<UserDto> GetUserByEmail(string email);
+
+
     }
 }

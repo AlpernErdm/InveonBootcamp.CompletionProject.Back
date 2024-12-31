@@ -30,6 +30,11 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
             var user = await _unitOfWork.Users.GetByIdAsync(id);
             return _mapper.Map<UserDto>(user);
         }
+        public async Task<UserDto> GetUserByEmail(string email)
+        {
+            var user = await _unitOfWork.Users.GetByEmailAsync(email);
+            return _mapper.Map<UserDto>(user);
+        }
         public async Task<User> AuthenticateUserAsync(string email, string password)
         {
             var user = await _unitOfWork.Users
@@ -48,7 +53,7 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
             return userDto;
         }
 
-        public async Task<UserDto> UpdateUserAsync(int id, UpdateUserDto updateUserDto)
+        public async Task<UserDto> UpdateUserAsync(Guid id, UpdateUserDto updateUserDto)
         {
             var existingUser = await _unitOfWork.Users.GetByIdAsync(id);
             if (existingUser == null)

@@ -11,5 +11,6 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Abstract
         Task<OrderDto> AddOrderAsync(CreateOrderDto orderDto);
         Task<OrderDto> UpdateOrderAsync(int id, UpdateOrderDto updateOrderDto);
         Task DeleteOrderAsync(int id);
+        Task<IEnumerable<OrderDto>> GetUserOrdersByEmailAsync(string email); // Yeni metot
     }
 }

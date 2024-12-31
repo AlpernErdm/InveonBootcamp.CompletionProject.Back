@@ -37,11 +37,9 @@ namespace InveonBootcamp.CompletionProject.Controllers
         }
 
         [HttpPost]
-        //  [Authorize]
         public async Task<ActionResult<OrderDto>> CreateOrder(CreateOrderDto createOrderDto)
         {
             var orderDto = await _orderService.AddOrderAsync(createOrderDto);
-    
             return CreatedAtAction(nameof(GetOrder), new { id = orderDto.Id }, orderDto);
         }
 
@@ -59,6 +57,16 @@ namespace InveonBootcamp.CompletionProject.Controllers
         {
             await _orderService.DeleteOrderAsync(id);
             return NoContent();
+        }
+        [HttpGet("{email}")]
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetUserOrdersByEmail(string email)
+        {
+            var orders = await _orderService.GetUserOrdersByEmailAsync(email);
+            if (orders == null || !orders.Any())
+            {
+                return NotFound("No orders found.");
+            }
+            return Ok(orders);
         }
     }
 }

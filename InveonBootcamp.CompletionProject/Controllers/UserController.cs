@@ -1,4 +1,5 @@
 ﻿using InveonBootcamp.CompletionProject.BusinessLayer.Abstract;
+using InveonBootcamp.CompletionProject.BusinessLayer.Concrete;
 using InveonBootcamp.CompletionProject.Core.Dtos;
 using InveonBootcamp.CompletionProject.Core.Dtos.CreateDtos;
 using InveonBootcamp.CompletionProject.Core.Dtos.UpdateDtos;
@@ -46,8 +47,8 @@ namespace InveonBootcamp.CompletionProject.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize]
-        public async Task<IActionResult> UpdateUser(int id, UpdateUserDto updateUserDto)
+        //[Authorize]
+        public async Task<IActionResult> UpdateUser(Guid id, UpdateUserDto updateUserDto)
         {
             var userDto = await _userService.UpdateUserAsync(id, updateUserDto);
             return Ok(userDto);
@@ -60,5 +61,12 @@ namespace InveonBootcamp.CompletionProject.Controllers
             await _userService.DeleteUserAsync(id);
             return NoContent();
         }
+        [HttpGet("{email}")]
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUserByEmail(string email)
+        {
+            var orders = await _userService.GetUserByEmail(email); 
+            return Ok(orders);
+        }
+
     }
 }
