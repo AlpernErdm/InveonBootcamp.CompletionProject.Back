@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InveonBootcamp.CompletionProject.DataAccessLayer.Context
 {
-    public class ApplicationDbContext(DbContextOptions options) : DbContext(options)
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
         public DbSet<Course> Courses { get; set; }
         public DbSet<User> Users { get; set; }
@@ -30,9 +30,9 @@ namespace InveonBootcamp.CompletionProject.DataAccessLayer.Context
                 .Property(c => c.Price)
                 .HasColumnType("decimal(18,2)");
 
-            modelBuilder.Entity<Order>()
-                .HasOne(o => o.User)
-                .WithMany(u => u.Orders)
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Orders)
+                .WithOne(o => o.User)
                 .HasForeignKey(o => o.UserId);
 
             modelBuilder.Entity<Order>()
@@ -40,7 +40,6 @@ namespace InveonBootcamp.CompletionProject.DataAccessLayer.Context
                 .WithOne(p => p.Order)
                 .HasForeignKey<Payment>(p => p.OrderId);
 
-            // Payment Amount için hassasiyet ve ölçek belirleme
             modelBuilder.Entity<Payment>()
                 .Property(p => p.Amount)
                 .HasColumnType("decimal(18,2)");

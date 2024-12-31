@@ -18,7 +18,7 @@ namespace InveonBootcamp.CompletionProject.Controllers
             _authService = authService;
         }
 
-        [HttpPost("LoginUser")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> LoginUser(LoginDtoRequest request)
         {

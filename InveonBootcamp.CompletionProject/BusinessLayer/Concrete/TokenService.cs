@@ -9,29 +9,35 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
 {
     public class TokenService : ITokenService
     {
-        readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
 
         public TokenService(IConfiguration configuration)
         {
-            this.configuration = configuration;
+            _configuration = configuration;
         }
 
         public Task<GenerateTokenResponse> GenerateToken(GenerateTokenRequest request)
         {
-            SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["AppSettings:Secret"]));
+            SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["AppSettings:Secret"]));
 
             var dateTimeNow = DateTime.UtcNow;
 
+            List<Claim> claims = new List<Claim>
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, request.Email),
+            new Claim(JwtRegisteredClaimNames.Email, request.Email),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim("userId", request.UserId.ToString()) // Kullanıcı ID'sini claim olarak ekliyoruz
+        };
+
             JwtSecurityToken jwt = new JwtSecurityToken(
-                    issuer: configuration["AppSettings:ValidIssuer"],
-                    audience: configuration["AppSettings:ValidAudience"],
-                    claims: new List<Claim> {
-                    new Claim("Email", request.Email)
-                    },
-                    notBefore: dateTimeNow,
-                    expires: dateTimeNow.Add(TimeSpan.FromMinutes(500)),
-                    signingCredentials: new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256)
-                );
+                issuer: _configuration["AppSettings:ValidIssuer"],
+                audience: _configuration["AppSettings:ValidAudience"],
+                claims: claims,
+                notBefore: dateTimeNow,
+                expires: dateTimeNow.Add(TimeSpan.FromMinutes(500)),
+                signingCredentials: new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256)
+            );
 
             return Task.FromResult(new GenerateTokenResponse
             {

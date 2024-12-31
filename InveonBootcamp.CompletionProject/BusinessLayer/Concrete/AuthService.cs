@@ -1,6 +1,8 @@
 ﻿using InveonBootcamp.CompletionProject.BusinessLayer.Abstract;
+using InveonBootcamp.CompletionProject.Core.Dtos;
 using InveonBootcamp.CompletionProject.Core.Dtos.Authenticate;
 using InveonBootcamp.CompletionProject.Core.Dtos.JwtAuth;
+using InveonBootcamp.CompletionProject.Core.Models;
 
 namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
 {
@@ -31,7 +33,11 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
 
             if (user != null)
             {
-                var generatedTokenInformation = await _tokenService.GenerateToken(new GenerateTokenRequest { Email = request.Email });
+                var generatedTokenInformation = await _tokenService.GenerateToken(new GenerateTokenRequest
+                {
+                    Email = request.Email,
+                    UserId = user.Id // Kullanıcı ID'sini ekliyoruz
+                });
                 return (true, generatedTokenInformation.Token, generatedTokenInformation.TokenExpireDate);
             }
 

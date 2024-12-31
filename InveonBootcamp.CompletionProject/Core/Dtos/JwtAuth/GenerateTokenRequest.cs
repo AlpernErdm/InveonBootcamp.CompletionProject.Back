@@ -3,5 +3,6 @@
     public class GenerateTokenRequest
     {
         public string Email { get; set; } = default!;
+        public Guid UserId { get; set; }
     }
 }
