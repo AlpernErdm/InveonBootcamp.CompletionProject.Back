@@ -1,27 +1,36 @@
-# InveonBootcamp Completion Project API
+InveonBootcamp Completion Project API Dokümantasyonu
 
-## Bilgi
-Bu API, InveonBootcamp Completion Project kapsamında geliştirilmiştir. Kullanıcı yönetimi, kurs yönetimi, sipariş ve ödeme işlemlerini içermektedir.
+Bilgi
 
-### API Detayları:
-- **Versiyon**: 1.0
-- **Base URL**: `/api`
+Bu API, InveonBootcamp Tamamlama Projesi kapsamında geliştirilmiştir. Kullanıcı yönetimi, kurs yönetimi, sipariş ve ödeme işlemlerini içermektedir.
 
----
 
-## Auth Endpoints
+API Detayları:
 
-### 1. User Login
-- **Endpoint**: `POST /api/Auth/LoginUser`
-- **Description**: Kullanıcı girişi yapar ve JWT token döner.
-- **Request Body**:
-  ```json
-  {
-    "username": "string",
-    "password": "string"
-  }
-  
-Response:
+
+Versiyon: 1.0
+
+Temel URL: /api
+
+
+
+Auth (Kimlik Doğrulama) Uç Noktaları
+
+1. Kullanıcı Girişi
+
+
+Uç Nokta: POST /api/Auth/LoginUser
+
+Açıklama: Kullanıcı girişi yapar ve JWT token döner.
+
+İstek Gövdesi:
+{
+  "username": "string",
+  "password": "string"
+}
+
+
+Yanıt:
 {
   "authenticateResult": true,
   "authToken": "string",
@@ -30,130 +39,128 @@ Response:
 
 
 
+Kurs Uç Noktaları (Course Endpoints)
 
-Course Endpoints
-
-1. Get All Courses
+1. Tüm Kursları Getir
 
 
-Endpoint: GET /api/Course
+Uç Nokta: GET /api/Course/GetCourses
 
-Description: Tüm kursları listeler.
+Açıklama: Tüm kursları listeler.
 
-Response:
+Yanıt:
 [
   {
     "id": 1,
-    "name": "Course Name",
-    "description": "Course Description",
+    "name": "Kurs Adı",
+    "description": "Kurs Açıklaması",
     "price": 100,
-    "category": "Category"
+    "category": "Kategori"
   }
 ]
 
 
 
-2. Create Course
+2. Kurs Oluştur
 
 
-Endpoint: POST /api/Course
+Uç Nokta: POST /api/Course/Create
 
-Description: Yeni bir kurs oluşturur.
+Açıklama: Yeni bir kurs oluşturur.
 
-Request Body:
+İstek Gövdesi:
 {
-  "name": "Course Name",
-  "description": "Course Description",
+  "name": "Kurs Adı",
+  "description": "Kurs Açıklaması",
   "price": 100,
-  "category": "Category"
+  "category": "Kategori"
 }
 
 
-Response:
+Yanıt:
 {
   "id": 1,
-  "name": "Course Name",
-  "description": "Course Description",
+  "name": "Kurs Adı",
+  "description": "Kurs Açıklaması",
   "price": 100,
-  "category": "Category"
+  "category": "Kategori"
 }
 
 
 
-3. Get Course by ID
+3. ID'ye Göre Kurs Getir
 
 
-Endpoint: GET /api/Course/{id}
+Uç Nokta: GET /api/Course/GetCourse/{id}
 
-Description: Belirli ID'ye sahip kursu getirir.
+Açıklama: Belirli ID'ye sahip kursu getirir.
 
-Response:
+Yanıt:
 {
   "id": 1,
-  "name": "Course Name",
-  "description": "Course Description",
+  "name": "Kurs Adı",
+  "description": "Kurs Açıklaması",
   "price": 100,
-  "category": "Category"
+  "category": "Kategori"
 }
 
 
 
-4. Update Course
+4. Kurs Güncelle
 
 
-Endpoint: PUT /api/Course/{id}
+Uç Nokta: PUT /api/Course/UpdateCourse/{id}
 
-Description: Belirli ID'ye sahip kursu günceller.
+Açıklama: Belirli ID'ye sahip kursu günceller.
 
-Request Body:
+İstek Gövdesi:
 {
-  "name": "Updated Course Name",
-  "description": "Updated Course Description",
+  "name": "Güncellenmiş Kurs Adı",
+  "description": "Güncellenmiş Kurs Açıklaması",
   "price": 150,
-  "category": "Updated Category"
+  "category": "Güncellenmiş Kategori"
 }
 
 
-Response:
+Yanıt:
 {
   "id": 1,
-  "name": "Updated Course Name",
-  "description": "Updated Course Description",
+  "name": "Güncellenmiş Kurs Adı",
+  "description": "Güncellenmiş Kurs Açıklaması",
   "price": 150,
-  "category": "Updated Category"
+  "category": "Güncellenmiş Kategori"
 }
 
 
 
-5. Delete Course
+5. Kurs Sil
 
 
-Endpoint: DELETE /api/Course/{id}
+Uç Nokta: DELETE /api/Course/DeleteCourse/{id}
 
-Description: Belirli ID'ye sahip kursu siler.
+Açıklama: Belirli ID'ye sahip kursu siler.
 
-Response:
+Yanıt:
 {
-  "message": "Course deleted successfully."
+  "message": "Kurs başarıyla silindi."
 }
 
 
 
+Sipariş Uç Noktaları (Order Endpoints)
 
-Order Endpoints
-
-1. Get All Orders
+1. Tüm Siparişleri Getir
 
 
-Endpoint: GET /api/Order
+Uç Nokta: GET /api/Order/GetOrders
 
-Description: Tüm siparişleri listeler.
+Açıklama: Tüm siparişleri listeler.
 
-Response:
+Yanıt:
 [
   {
     "id": 1,
-    "userId": "user-id",
+    "userId": "kullanıcı-id",
     "orderDate": "2023-01-01T00:00:00Z",
     "orderCourses": [...],
     "payment": {...}
@@ -162,25 +169,25 @@ Response:
 
 
 
-2. Create Order
+2. Sipariş Oluştur
 
 
-Endpoint: POST /api/Order
+Uç Nokta: POST /api/Order/CreateOrder
 
-Description: Yeni bir sipariş oluşturur.
+Açıklama: Yeni bir sipariş oluşturur.
 
-Request Body:
+İstek Gövdesi:
 {
-  "userId": "user-id",
+  "userId": "kullanıcı-id",
   "orderDate": "2023-01-01T00:00:00Z",
   "orderCourses": [...]
 }
 
 
-Response:
+Yanıt:
 {
   "id": 1,
-  "userId": "user-id",
+  "userId": "kullanıcı-id",
   "orderDate": "2023-01-01T00:00:00Z",
   "orderCourses": [...],
   "payment": {...}
@@ -188,17 +195,17 @@ Response:
 
 
 
-3. Get Order by ID
+3. ID'ye Göre Sipariş Getir
 
 
-Endpoint: GET /api/Order/{id}
+Uç Nokta: GET /api/Order/GetOrder/{id}
 
-Description: Belirli ID'ye sahip siparişi getirir.
+Açıklama: Belirli ID'ye sahip siparişi getirir.
 
-Response:
+Yanıt:
 {
   "id": 1,
-  "userId": "user-id",
+  "userId": "kullanıcı-id",
   "orderDate": "2023-01-01T00:00:00Z",
   "orderCourses": [...],
   "payment": {...}
@@ -206,25 +213,25 @@ Response:
 
 
 
-4. Update Order
+4. Sipariş Güncelle
 
 
-Endpoint: PUT /api/Order/{id}
+Uç Nokta: PUT /api/Order/UpdateOrder/{id}
 
-Description: Belirli ID'ye sahip siparişi günceller.
+Açıklama: Belirli ID'ye sahip siparişi günceller.
 
-Request Body:
+İstek Gövdesi:
 {
-  "userId": "updated-user-id",
+  "userId": "güncellenmiş-kullanıcı-id",
   "orderDate": "2023-01-01T00:00:00Z",
   "orderCourses": [...]
 }
 
 
-Response:
+Yanıt:
 {
   "id": 1,
-  "userId": "updated-user-id",
+  "userId": "güncellenmiş-kullanıcı-id",
   "orderDate": "2023-01-01T00:00:00Z",
   "orderCourses": [...],
   "payment": {...}
@@ -232,31 +239,30 @@ Response:
 
 
 
-5. Delete Order
+5. Sipariş Sil
 
 
-Endpoint: DELETE /api/Order/{id}
+Uç Nokta: DELETE /api/Order/DeleteOrder/{id}
 
-Description: Belirli ID'ye sahip siparişi siler.
+Açıklama: Belirli ID'ye sahip siparişi siler.
 
-Response:
+Yanıt:
 {
-  "message": "Order deleted successfully."
+  "message": "Sipariş başarıyla silindi."
 }
 
 
 
+Ödeme Uç Noktaları (Payment Endpoints)
 
-Payment Endpoints
-
-1. Get All Payments
+1. Tüm Ödemeleri Getir
 
 
-Endpoint: GET /api/Payment
+Uç Nokta: GET /api/Payment/GetPayments
 
-Description: Tüm ödemeleri listeler.
+Açıklama: Tüm ödemeleri listeler.
 
-Response:
+Yanıt:
 [
   {
     "id": 1,
@@ -269,14 +275,14 @@ Response:
 
 
 
-2. Create Payment
+2. Ödeme Oluştur
 
 
-Endpoint: POST /api/Payment
+Uç Nokta: POST /api/Payment/PostPayment
 
-Description: Yeni bir ödeme oluşturur.
+Açıklama: Yeni bir ödeme oluşturur.
 
-Request Body:
+İstek Gövdesi:
 {
   "amount": 100,
   "paymentStatus": "Paid",
@@ -285,25 +291,7 @@ Request Body:
 }
 
 
-Response:
-{
-  "id": 1,
-  "amount": 100,
-  "paymentStatus": "Paid",
-  "paymentDate": "2023-01-01T00:00:00Z",
-  "orderId": 1
-}
-
-
-
-3. Get Payment by ID
-
-
-Endpoint: GET /api/Payment/{id}
-
-Description: Belirli ID'ye sahip ödemeyi getirir.
-
-Response:
+Yanıt:
 {
   "id": 1,
   "amount": 100,
@@ -314,14 +302,32 @@ Response:
 
 
 
-4. Update Payment
+3. ID'ye Göre Ödeme Getir
 
 
-Endpoint: PUT /api/Payment/{id}
+Uç Nokta: GET /api/Payment/GetPayment/{id}
 
-Description: Belirli ID'ye sahip ödemeyi günceller.
+Açıklama: Belirli ID'ye sahip ödemeyi getirir.
 
-Request Body:
+Yanıt:
+{
+  "id": 1,
+  "amount": 100,
+  "paymentStatus": "Paid",
+  "paymentDate": "2023-01-01T00:00:00Z",
+  "orderId": 1
+}
+
+
+
+4. Ödeme Güncelle
+
+
+Uç Nokta: PUT /api/Payment/PutPayment/{id}
+
+Açıklama: Belirli ID'ye sahip ödemeyi günceller.
+
+İstek Gövdesi:
 {
   "amount": 150,
   "paymentStatus": "Updated Status",
@@ -330,7 +336,7 @@ Request Body:
 }
 
 
-Response:
+Yanıt:
 {
   "id": 1,
   "amount": 150,
@@ -341,131 +347,142 @@ Response:
 
 
 
-5. Delete Payment
+5. Ödeme Sil
 
 
-Endpoint: DELETE /api/Payment/{id}
+Uç Nokta: DELETE /api/Payment/DeletePayment/{id}
 
-Description: Belirli ID'ye sahip ödemeyi siler.
+Açıklama: Belirli ID'ye sahip ödemeyi siler.
 
-Response:
+Yanıt:
 {
-  "message": "Payment deleted successfully."
+  "message": "Ödeme başarıyla silindi."
 }
 
 
 
+Kullanıcı Uç Noktaları (User Endpoints)
 
-User Endpoints
-
-1. Get All Users
+1. Tüm Kullanıcıları Getir
 
 
-Endpoint: GET /api/User
+Uç Nokta: GET /api/User/GetUsers
 
-Description: Tüm kullanıcıları listeler.
+Açıklama: Tüm kullanıcıları listeler.
 
-Response:
+Yanıt:
 [
   {
     "id": "user-id",
-    "username": "username",
-    "password": "password",
-    "role": "role",
-    "adress": "address",
-    "phoneNumber": "phone-number"
+    "username": "kullanıcıadı",
+    "password": "şifre",
+    "email": "email@example.com",
+    "phoneNumber": "telefon-numarası"
   }
 ]
 
 
 
-2. Create User
+2. Kullanıcı Oluştur
 
 
-Endpoint: POST /api/User
+Uç Nokta: POST /api/User/RegisterUser
 
-Description: Yeni bir kullanıcı oluşturur.
+Açıklama: Yeni bir kullanıcı oluşturur.
 
-Request Body:
+İstek Gövdesi:
 {
-  "username": "username",
-  "password": "password",
-  "role": "role",
-  "adress": "address",
-  "phoneNumber": "phone-number"
+  "username": "kullanıcıadı",
+  "password": "şifre",
+  "email": "email@example.com",
+  "phoneNumber": "telefon-numarası"
 }
 
 
-Response:
+Yanıt:
 {
   "id": "user-id",
-  "username": "username",
-  "password": "password",
-  "role": "role",
-  "adress": "address",
-  "phoneNumber": "phone-number"
+  "username": "kullanıcıadı",
+  "password": "şifre",
+  "email": "email@example.com",
+  "phoneNumber": "telefon-numarası"
 }
 
 
 
-3. Get User by ID
+3. ID'ye Göre Kullanıcı Getir
 
 
-Endpoint: GET /api/User/{id}
+Uç Nokta: GET /api/User/GetUser/{id}
 
-Description: Belirli ID'ye sahip kullanıcıyı getirir.
+Açıklama: Belirli ID'ye sahip kullanıcıyı getirir.
 
-Response:
+Yanıt:
 {
   "id": "user-id",
-  "username": "username",
-  "password": "password",
-  "role": "role",
-  "adress": "address",
-  "phoneNumber": "phone-number"
+  "username": "kullanıcıadı",
+  "password": "şifre",
+  "email": "email@example.com",
+  "phoneNumber": "telefon-numarası"
 }
 
 
 
-4. Update User
+4. Kullanıcı Güncelle
 
 
-Endpoint: PUT /api/User/{id}
+Uç Nokta: PUT /api/User/UpdateUser/{id}
 
-Description: Belirli ID'ye sahip kullanıcıyı günceller.
+Açıklama: Belirli ID'ye sahip kullanıcıyı günceller.
 
-Request Body:
+İstek Gövdesi:
 {
-  "username": "updated-username",
-  "password": "updated-password",
-  "role": "updated-role",
-  "adress": "updated-address",
-  "phoneNumber": "updated-phone-number"
+  "username": "güncellenmiş-kullanıcıadı",
+  "password": "güncellenmiş-şifre",
+  "email": "güncellenmiş-email@example.com",
+  "phoneNumber": "güncellenmiş-telefon-numarası"
 }
 
 
-Response:
+Yanıt:
 {
   "id": "user-id",
-  "username": "updated-username",
-  "password": "updated-password",
-  "role": "updated-role",
-  "adress": "updated-address",
-  "phoneNumber": "updated-phone-number"
+  "username": "güncellenmiş-kullanıcıadı",
+  "password": "güncellenmiş-şifre",
+  "email": "güncellenmiş-email@example.com",
+  "phoneNumber": "güncellenmiş-telefon-numarası"
 }
 
 
 
-5. Delete User
+5. Kullanıcı Sil
 
 
-Endpoint: DELETE /api/User/{id}
+Uç Nokta: DELETE /api/User/DeleteUser/{id}
 
-Description: Belirli ID'ye sahip kullanıcıyı siler.
+Açıklama: Belirli ID'ye sahip kullanıcıyı siler.
 
-Response:
+Yanıt:
 {
-  "message": "User deleted successfully."
+  "message": "Kullanıcı başarıyla silindi."
+}
+
+
+
+6. Kullanıcı Email İle Getir
+
+
+Uç Nokta: GET /api/User/GetUserByEmail/{email}
+
+Açıklama: Belirli email'e sahip kullanıcıyı getirir.
+
+Yanıt:
+{
+  "id": "user-id",
+  "username": "kullanıcıadı",
+  "password": "şifre",
+  "email": "email@example.com",
+  "phoneNumber": "telefon-numarası"
 }
 
 
@@ -483,4 +500,8 @@ Uç nokta URL'sini yapıştırın.
 
 Gerekli durumlarda istek gövdesini (request body) JSON formatında sağlayın.
 
-İstasyona tıklayın (Send) ve yanıtı görün.
+İsteği gönderin (Send) ve yanıtı görün.
+
+
+
+Bu dokümantasyon, InveonBootcamp Tamamlama Projesi kapsamında geliştirilen API'yi kullanmaya yönelik ayrıntılı bilgileri içerir. Her bir uç nokta için gerekli istek ve yanıt formatları sağlanmıştır. Bu dökümantasyon, işlemleri düzgün bir şekilde yerine getirmek için geliştiricilere rehberlik eder.
