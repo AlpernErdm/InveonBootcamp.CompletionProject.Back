@@ -1,7 +1,9 @@
 # InveonBootcamp Completion Project API
 
 ## Bilgi
-Bu API, InveonBootcamp Completion Project kapsamında geliştirilmiştir. Kullanıcı yönetimi, kurs yönetimi, sipariş ve ödeme işlemlerini içermektedir.
+Bu API, Inveon FullStack Developer Bootcamp kapsamında geliştirilmiştir. Kullanıcı yönetimi, kurs yönetimi, sipariş ve ödeme işlemlerini içermektedir.
+
+Bu dokümantasyon, InveonBootcamp Tamamlama Projesi kapsamında geliştirilen API'yi kullanmaya yönelik ayrıntılı bilgileri içerir. Her bir uç nokta için gerekli istek ve yanıt formatları sağlanmıştır. Bu dökümantasyon, işlemleri düzgün bir şekilde yerine getirmek için geliştiricilere rehberlik eder.
 
 ### API Detayları:
 - **Versiyon**: 1.0
