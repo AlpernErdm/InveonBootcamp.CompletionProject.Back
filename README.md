@@ -1,34 +1,25 @@
-InveonBootcamp Completion Project API Dokümantasyonu
+# InveonBootcamp Completion Project API
 
-Bilgi
+## Bilgi
+Bu API, InveonBootcamp Completion Project kapsamında geliştirilmiştir. Kullanıcı yönetimi, kurs yönetimi, sipariş ve ödeme işlemlerini içermektedir.
 
-Bu API, InveonBootcamp Tamamlama Projesi kapsamında geliştirilmiştir. Kullanıcı yönetimi, kurs yönetimi, sipariş ve ödeme işlemlerini içermektedir.
+### API Detayları:
+- **Versiyon**: 1.0
+- **Temel URL**: `/api`
 
+---
 
-API Detayları:
+## Auth (Kimlik Doğrulama) Uç Noktaları
 
-
-Versiyon: 1.0
-
-Temel URL: /api
-
-
-
-Auth (Kimlik Doğrulama) Uç Noktaları
-
-1. Kullanıcı Girişi
-
-
-Uç Nokta: POST /api/Auth/LoginUser
-
-Açıklama: Kullanıcı girişi yapar ve JWT token döner.
-
-İstek Gövdesi:
-{
-  "username": "string",
-  "password": "string"
-}
-
+### 1. Kullanıcı Girişi
+- **Uç Nokta**: `POST /api/Auth/LoginUser`
+- **Açıklama**: Kullanıcı girişi yapar ve JWT token döner.
+- **İstek Gövdesi**:
+  ```json
+  {
+    "username": "string",
+    "password": "string"
+  }
 
 Yanıt:
 {
@@ -503,5 +494,3 @@ Gerekli durumlarda istek gövdesini (request body) JSON formatında sağlayın.
 İsteği gönderin (Send) ve yanıtı görün.
 
 
-
-Bu dokümantasyon, InveonBootcamp Tamamlama Projesi kapsamında geliştirilen API'yi kullanmaya yönelik ayrıntılı bilgileri içerir. Her bir uç nokta için gerekli istek ve yanıt formatları sağlanmıştır. Bu dökümantasyon, işlemleri düzgün bir şekilde yerine getirmek için geliştiricilere rehberlik eder.
