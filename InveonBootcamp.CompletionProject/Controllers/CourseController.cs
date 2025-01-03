@@ -38,6 +38,7 @@ namespace InveonBootcamp.CompletionProject.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<CourseDto>> Create(CreateCourseDto courseDto)
         {
             var courseDtos = await _courseService.AddCourseAsync(courseDto);
@@ -45,6 +46,7 @@ namespace InveonBootcamp.CompletionProject.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateCourse(int id, UpdateCourseDto updateCourseDto)
         {
             var courseDto = await _courseService.UpdateCourseAsync(id, updateCourseDto);
@@ -52,6 +54,7 @@ namespace InveonBootcamp.CompletionProject.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
             await _courseService.DeleteCourseAsync(id);

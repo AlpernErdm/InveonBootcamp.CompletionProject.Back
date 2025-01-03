@@ -5,9 +5,9 @@ using InveonBootcamp.CompletionProject.DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
 using System.Text;
 using InveonBootcamp.CompletionProject.Core;
+using InveonBootcamp.CompletionProject.Core.ExceptionHandler;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -76,6 +76,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseRouting();
 app.UseCors("AllowAllOrigins");
@@ -84,5 +85,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+var orderConsumerService = new OrderConsumerService();
+var consumerThread = new Thread(new ThreadStart(orderConsumerService.StartListening));
+consumerThread.Start();
 
 app.Run();

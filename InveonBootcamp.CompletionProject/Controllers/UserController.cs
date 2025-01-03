@@ -39,7 +39,6 @@ namespace InveonBootcamp.CompletionProject.Controllers
         }
 
         [HttpPost]
-        //[Authorize]
         public async Task<ActionResult<UserDto>> RegisterUser(CreateUserDto createUserDto)
         {
             var userDto = await _userService.AddUserAsync(createUserDto);
@@ -47,7 +46,6 @@ namespace InveonBootcamp.CompletionProject.Controllers
         }
 
         [HttpPut("{id}")]
-        //[Authorize]
         public async Task<IActionResult> UpdateUser(Guid id, UpdateUserDto updateUserDto)
         {
             var userDto = await _userService.UpdateUserAsync(id, updateUserDto);
@@ -55,7 +53,6 @@ namespace InveonBootcamp.CompletionProject.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
             await _userService.DeleteUserAsync(id);

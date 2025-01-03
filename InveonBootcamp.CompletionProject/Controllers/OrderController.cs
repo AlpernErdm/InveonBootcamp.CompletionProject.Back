@@ -68,6 +68,12 @@ namespace InveonBootcamp.CompletionProject.Controllers
             }
             return Ok(orders);
         }
+        [HttpPost]
+        public async Task<IActionResult> PlaceOrder([FromBody] CreateOrderDto createOrderDto)
+        {
+            var orderDto = await _orderService.AddOrderAsync(createOrderDto);
+            return CreatedAtAction(nameof(GetOrder), new { id = orderDto.Id }, orderDto);
+        }
     }
 }
 

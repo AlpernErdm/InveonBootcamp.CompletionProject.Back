@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using InveonBootcamp.CompletionProject.BusinessLayer.Abstract;
-using InveonBootcamp.CompletionProject.Core.Dtos;
 using InveonBootcamp.CompletionProject.Core.Dtos.CreateDtos;
 using InveonBootcamp.CompletionProject.Core.Dtos.UpdateDtos;
+using InveonBootcamp.CompletionProject.Core.Dtos;
 using InveonBootcamp.CompletionProject.Core.Models;
 using InveonBootcamp.CompletionProject.DataAccessLayer.Repositories;
+using InveonBootcamp.CompletionProject.Core.ExceptionHandler.ExceptionClasses;
 
 namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
 {
@@ -28,6 +29,12 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
         public async Task<PaymentDto> GetPaymentByIdAsync(int id)
         {
             var payment = await _unitOfWork.Payments.GetByIdAsync(id);
+
+            if (payment == null)
+            {
+                throw new NotFoundException("Payment not found");
+            }
+
             return _mapper.Map<PaymentDto>(payment);
         }
 
@@ -35,10 +42,14 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
         {
             var payment = _mapper.Map<Payment>(createPaymentDto);
             await _unitOfWork.Payments.AddAsync(payment);
-            await _unitOfWork.CompleteAsync();
+            var result = await _unitOfWork.CompleteAsync();
 
-            var paymentDto = _mapper.Map<PaymentDto>(payment);
-            return paymentDto;
+            if (result == 0)
+            {
+                throw new CreationFailedException("Payment creation failed.");
+            }
+
+            return _mapper.Map<PaymentDto>(payment);
         }
 
         public async Task<PaymentDto> UpdatePaymentAsync(int id, UpdatePaymentDto updatePaymentDto)
@@ -46,24 +57,31 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
             var existingPayment = await _unitOfWork.Payments.GetByIdAsync(id);
             if (existingPayment == null)
             {
-                throw new Exception("Payment not found");
+                throw new NotFoundException("Payment not found");
             }
             _mapper.Map(updatePaymentDto, existingPayment);
-
             _unitOfWork.Payments.Update(existingPayment);
-            await _unitOfWork.CompleteAsync();
+            var result = await _unitOfWork.CompleteAsync();
 
-            var paymentDto = _mapper.Map<PaymentDto>(existingPayment);
-            return paymentDto;
+            if (result == 0) 
+            {
+             throw new UpdateFailedException("Payment update failed.");
+            }
+            return _mapper.Map<PaymentDto>(existingPayment);
         }
 
         public async Task DeletePaymentAsync(int id)
         {
             var payment = await _unitOfWork.Payments.GetByIdAsync(id);
-            if (payment != null)
+            if (payment == null)
             {
-                _unitOfWork.Payments.Remove(payment);
-                await _unitOfWork.CompleteAsync();
+                throw new NotFoundException("Payment not found");
+            }
+            _unitOfWork.Payments.Remove(payment);
+            var result = await _unitOfWork.CompleteAsync();
+            if (result == 0)
+            {
+                throw new DeletionFailedException("Payment deletion failed.");
             }
         }
     }

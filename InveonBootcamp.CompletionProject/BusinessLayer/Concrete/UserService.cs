@@ -3,6 +3,7 @@ using InveonBootcamp.CompletionProject.BusinessLayer.Abstract;
 using InveonBootcamp.CompletionProject.Core.Dtos;
 using InveonBootcamp.CompletionProject.Core.Dtos.CreateDtos;
 using InveonBootcamp.CompletionProject.Core.Dtos.UpdateDtos;
+using InveonBootcamp.CompletionProject.Core.ExceptionHandler.ExceptionClasses;
 using InveonBootcamp.CompletionProject.Core.Models;
 using InveonBootcamp.CompletionProject.DataAccessLayer.Repositories;
 
@@ -28,29 +29,45 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
         public async Task<UserDto> GetUserByIdAsync(Guid id)
         {
             var user = await _unitOfWork.Users.GetByIdAsync(id);
+            if (user == null)
+            {
+            throw new NotFoundException("User not found");
+            }
             return _mapper.Map<UserDto>(user);
         }
+
         public async Task<UserDto> GetUserByEmail(string email)
         {
             var user = await _unitOfWork.Users.GetByEmailAsync(email);
+            if (user == null)
+            {
+        throw new NotFoundException("User not found");
+            }
             return _mapper.Map<UserDto>(user);
         }
         public async Task<User> AuthenticateUserAsync(string email, string password)
         {
-            var user = await _unitOfWork.Users
-                .GetAsync(u => u.Email == email && u.Password == password);
-
+            var user = await _unitOfWork.Users.GetAsync(u => u.Email == email && u.Password == password);
+            if (user == null)
+            {
+                throw new NotFoundException("User not found");
+            }
             return user;
         }
+
         public async Task<UserDto> AddUserAsync(CreateUserDto userForCreateDto)
         {
             var user = _mapper.Map<User>(userForCreateDto);
-            user.Id = Guid.NewGuid(); 
+            user.Id = Guid.NewGuid();
             await _unitOfWork.Users.AddAsync(user);
-            await _unitOfWork.CompleteAsync();
+            var result = await _unitOfWork.CompleteAsync();
 
-            var userDto = _mapper.Map<UserDto>(user);
-            return userDto;
+            if (result == 0) 
+            {
+                throw new CreationFailedException("User creation failed.");
+            }
+
+            return _mapper.Map<UserDto>(user);
         }
 
         public async Task<UserDto> UpdateUserAsync(Guid id, UpdateUserDto updateUserDto)
@@ -58,25 +75,30 @@ namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
             var existingUser = await _unitOfWork.Users.GetByIdAsync(id);
             if (existingUser == null)
             {
-                throw new Exception("User not found");
+                throw new NotFoundException("User not found");
             }
-
             _mapper.Map(updateUserDto, existingUser);
-
             _unitOfWork.Users.Update(existingUser);
-            await _unitOfWork.CompleteAsync();
+            var result = await _unitOfWork.CompleteAsync();
 
-            var userDto = _mapper.Map<UserDto>(existingUser);
-            return userDto;
+            if (result == 0)
+            {
+                throw new UpdateFailedException("User update failed.");
+            }
+            return _mapper.Map<UserDto>(existingUser);
         }
-
         public async Task DeleteUserAsync(Guid id)
         {
             var user = await _unitOfWork.Users.GetByIdAsync(id);
-            if (user != null)
+            if (user == null)
             {
-                _unitOfWork.Users.Remove(user);
-                await _unitOfWork.CompleteAsync();
+                throw new NotFoundException("User not found");
+            }
+            _unitOfWork.Users.Remove(user);
+            var result = await _unitOfWork.CompleteAsync();
+            if (result == 0) 
+            {
+        throw new DeletionFailedException("User deletion failed.");
             }
         }
     }
