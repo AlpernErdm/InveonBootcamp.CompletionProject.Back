@@ -86,8 +86,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-var orderConsumerService = new OrderConsumerService();
-var consumerThread = new Thread(new ThreadStart(orderConsumerService.StartListening));
-consumerThread.Start();
-
 app.Run();
