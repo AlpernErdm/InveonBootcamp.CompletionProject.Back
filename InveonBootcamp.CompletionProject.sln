@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InveonBootcamp.CompletionProject", "InveonBootcamp.CompletionProject\InveonBootcamp.CompletionProject.csproj", "{54DC7758-3145-4663-96D7-8651949993E8}"
 EndProject
