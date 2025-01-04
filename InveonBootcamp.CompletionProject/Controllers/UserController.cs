@@ -1,10 +1,7 @@
 ﻿using InveonBootcamp.CompletionProject.BusinessLayer.Abstract;
-using InveonBootcamp.CompletionProject.BusinessLayer.Concrete;
 using InveonBootcamp.CompletionProject.Core.Dtos;
 using InveonBootcamp.CompletionProject.Core.Dtos.CreateDtos;
 using InveonBootcamp.CompletionProject.Core.Dtos.UpdateDtos;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InveonBootcamp.CompletionProject.Controllers
