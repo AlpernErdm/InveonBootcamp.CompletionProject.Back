@@ -23,7 +23,7 @@ Bu dokümantasyon, InveonBootcamp Tamamlama Projesi kapsamında geliştirilen AP
     "password": "string"
   }
 
-**Yanıt**:
+Yanıt:
 ```json
 {
   "authenticateResult": true,
@@ -35,14 +35,15 @@ Bu dokümantasyon, InveonBootcamp Tamamlama Projesi kapsamında geliştirilen AP
 
 Kurs Uç Noktaları (Course Endpoints)
 
-1. Tüm Kursları Getir
+1. **Tüm Kursları Getir**
 
 
 Uç Nokta: GET /api/Course/GetCourses
 
 Açıklama: Tüm kursları listeler.
-```
+
 Yanıt:
+```json
 [
   {
     "id": 1,
@@ -72,8 +73,9 @@ Açıklama: Yeni bir kurs oluşturur.
 }
 
 ```
-```json
+
 Yanıt:
+```json
 {
   "id": 1,
   "name": "Kurs Adı",
@@ -90,8 +92,9 @@ Yanıt:
 Uç Nokta: GET /api/Course/GetCourse/{id}
 
 Açıklama: Belirli ID'ye sahip kursu getirir.
-```json
+
 Yanıt:
+```json
 {
   "id": 1,
   "name": "Kurs Adı",
