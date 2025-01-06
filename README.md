@@ -24,17 +24,18 @@ Bu dokümantasyon, InveonBootcamp Tamamlama Projesi kapsamında geliştirilen AP
   }
 
 Yanıt:
+```json
 {
   "authenticateResult": true,
   "authToken": "string",
   "accessTokenExpireDate": "2023-01-01T00:00:00Z"
 }
 
-
+```
 
 Kurs Uç Noktaları (Course Endpoints)
 
-1. Tüm Kursları Getir
+1. **Tüm Kursları Getir**
 
 
 Uç Nokta: GET /api/Course/GetCourses
@@ -42,6 +43,7 @@ Uç Nokta: GET /api/Course/GetCourses
 Açıklama: Tüm kursları listeler.
 
 Yanıt:
+```json
 [
   {
     "id": 1,
@@ -51,17 +53,18 @@ Yanıt:
     "category": "Kategori"
   }
 ]
+```
 
 
-
-2. Kurs Oluştur
+2.**Kurs Oluştur**
 
 
 Uç Nokta: POST /api/Course/Create
 
 Açıklama: Yeni bir kurs oluşturur.
 
-İstek Gövdesi:
+**İstek Gövdesi**:
+```json
 {
   "name": "Kurs Adı",
   "description": "Kurs Açıklaması",
@@ -69,8 +72,10 @@ Açıklama: Yeni bir kurs oluşturur.
   "category": "Kategori"
 }
 
+```
 
 Yanıt:
+```json
 {
   "id": 1,
   "name": "Kurs Adı",
@@ -78,10 +83,10 @@ Yanıt:
   "price": 100,
   "category": "Kategori"
 }
+```
 
 
-
-3. ID'ye Göre Kurs Getir
+3. **ID'ye Göre Kurs Getir**
 
 
 Uç Nokta: GET /api/Course/GetCourse/{id}
@@ -89,6 +94,7 @@ Uç Nokta: GET /api/Course/GetCourse/{id}
 Açıklama: Belirli ID'ye sahip kursu getirir.
 
 Yanıt:
+```json
 {
   "id": 1,
   "name": "Kurs Adı",
@@ -96,26 +102,28 @@ Yanıt:
   "price": 100,
   "category": "Kategori"
 }
+```
 
 
-
-4. Kurs Güncelle
+4. **Kurs Güncelle**
 
 
 Uç Nokta: PUT /api/Course/UpdateCourse/{id}
 
 Açıklama: Belirli ID'ye sahip kursu günceller.
 
-İstek Gövdesi:
+**İstek Gövdesi**:
+```json
 {
   "name": "Güncellenmiş Kurs Adı",
   "description": "Güncellenmiş Kurs Açıklaması",
   "price": 150,
   "category": "Güncellenmiş Kategori"
 }
-
+```
 
 Yanıt:
+```json
 {
   "id": 1,
   "name": "Güncellenmiş Kurs Adı",
@@ -124,9 +132,9 @@ Yanıt:
   "category": "Güncellenmiş Kategori"
 }
 
+```
 
-
-5. Kurs Sil
+5. **Kurs Sil**
 
 
 Uç Nokta: DELETE /api/Course/DeleteCourse/{id}
@@ -134,15 +142,16 @@ Uç Nokta: DELETE /api/Course/DeleteCourse/{id}
 Açıklama: Belirli ID'ye sahip kursu siler.
 
 Yanıt:
+```json
 {
   "message": "Kurs başarıyla silindi."
 }
 
-
+```
 
 Sipariş Uç Noktaları (Order Endpoints)
 
-1. Tüm Siparişleri Getir
+1. **Tüm Siparişleri Getir**
 
 
 Uç Nokta: GET /api/Order/GetOrders
@@ -150,6 +159,7 @@ Uç Nokta: GET /api/Order/GetOrders
 Açıklama: Tüm siparişleri listeler.
 
 Yanıt:
+```json
 [
   {
     "id": 1,
@@ -160,9 +170,9 @@ Yanıt:
   }
 ]
 
+```
 
-
-2. Sipariş Oluştur
+2. **Sipariş Oluştur**
 
 
 Uç Nokta: POST /api/Order/CreateOrder
@@ -170,14 +180,16 @@ Uç Nokta: POST /api/Order/CreateOrder
 Açıklama: Yeni bir sipariş oluşturur.
 
 İstek Gövdesi:
+```json
 {
   "userId": "kullanıcı-id",
   "orderDate": "2023-01-01T00:00:00Z",
   "orderCourses": [...]
 }
-
+```
 
 Yanıt:
+```json
 {
   "id": 1,
   "userId": "kullanıcı-id",
@@ -186,9 +198,9 @@ Yanıt:
   "payment": {...}
 }
 
+```
 
-
-3. ID'ye Göre Sipariş Getir
+3. **ID'ye Göre Sipariş Getir**
 
 
 Uç Nokta: GET /api/Order/GetOrder/{id}
@@ -196,6 +208,7 @@ Uç Nokta: GET /api/Order/GetOrder/{id}
 Açıklama: Belirli ID'ye sahip siparişi getirir.
 
 Yanıt:
+```json
 {
   "id": 1,
   "userId": "kullanıcı-id",
@@ -203,10 +216,10 @@ Yanıt:
   "orderCourses": [...],
   "payment": {...}
 }
+```
 
 
-
-4. Sipariş Güncelle
+4. **Sipariş Güncelle**
 
 
 Uç Nokta: PUT /api/Order/UpdateOrder/{id}
@@ -214,14 +227,16 @@ Uç Nokta: PUT /api/Order/UpdateOrder/{id}
 Açıklama: Belirli ID'ye sahip siparişi günceller.
 
 İstek Gövdesi:
+```json
 {
   "userId": "güncellenmiş-kullanıcı-id",
   "orderDate": "2023-01-01T00:00:00Z",
   "orderCourses": [...]
 }
 
-
+```
 Yanıt:
+```json
 {
   "id": 1,
   "userId": "güncellenmiş-kullanıcı-id",
@@ -230,9 +245,9 @@ Yanıt:
   "payment": {...}
 }
 
+```
 
-
-5. Sipariş Sil
+5. **Sipariş Sil**
 
 
 Uç Nokta: DELETE /api/Order/DeleteOrder/{id}
@@ -240,15 +255,16 @@ Uç Nokta: DELETE /api/Order/DeleteOrder/{id}
 Açıklama: Belirli ID'ye sahip siparişi siler.
 
 Yanıt:
+```json
 {
   "message": "Sipariş başarıyla silindi."
 }
 
 
-
+```
 Ödeme Uç Noktaları (Payment Endpoints)
 
-1. Tüm Ödemeleri Getir
+1. **Tüm Ödemeleri Getir**
 
 
 Uç Nokta: GET /api/Payment/GetPayments
@@ -256,6 +272,7 @@ Uç Nokta: GET /api/Payment/GetPayments
 Açıklama: Tüm ödemeleri listeler.
 
 Yanıt:
+```json
 [
   {
     "id": 1,
@@ -266,9 +283,9 @@ Yanıt:
   }
 ]
 
+```
 
-
-2. Ödeme Oluştur
+2. **Ödeme Oluştur**
 
 
 Uç Nokta: POST /api/Payment/PostPayment
@@ -276,15 +293,17 @@ Uç Nokta: POST /api/Payment/PostPayment
 Açıklama: Yeni bir ödeme oluşturur.
 
 İstek Gövdesi:
+```json
 {
   "amount": 100,
   "paymentStatus": "Paid",
   "paymentDate": "2023-01-01T00:00:00Z",
   "orderId": 1
 }
-
+```
 
 Yanıt:
+```json
 {
   "id": 1,
   "amount": 100,
@@ -292,10 +311,10 @@ Yanıt:
   "paymentDate": "2023-01-01T00:00:00Z",
   "orderId": 1
 }
+```
 
 
-
-3. ID'ye Göre Ödeme Getir
+3. **ID'ye Göre Ödeme Getir**
 
 
 Uç Nokta: GET /api/Payment/GetPayment/{id}
@@ -303,6 +322,7 @@ Uç Nokta: GET /api/Payment/GetPayment/{id}
 Açıklama: Belirli ID'ye sahip ödemeyi getirir.
 
 Yanıt:
+```json
 {
   "id": 1,
   "amount": 100,
@@ -310,10 +330,10 @@ Yanıt:
   "paymentDate": "2023-01-01T00:00:00Z",
   "orderId": 1
 }
+```
 
 
-
-4. Ödeme Güncelle
+4. **Ödeme Güncelle**
 
 
 Uç Nokta: PUT /api/Payment/PutPayment/{id}
@@ -321,6 +341,7 @@ Uç Nokta: PUT /api/Payment/PutPayment/{id}
 Açıklama: Belirli ID'ye sahip ödemeyi günceller.
 
 İstek Gövdesi:
+```json
 {
   "amount": 150,
   "paymentStatus": "Updated Status",
@@ -328,19 +349,20 @@ Açıklama: Belirli ID'ye sahip ödemeyi günceller.
   "orderId": 1
 }
 
-
+```
 Yanıt:
 {
+```json
   "id": 1,
   "amount": 150,
   "paymentStatus": "Updated Status",
   "paymentDate": "2023-01-01T00:00:00Z",
   "orderId": 1
 }
+```
 
 
-
-5. Ödeme Sil
+5. **Ödeme Sil**
 
 
 Uç Nokta: DELETE /api/Payment/DeletePayment/{id}
@@ -348,15 +370,16 @@ Uç Nokta: DELETE /api/Payment/DeletePayment/{id}
 Açıklama: Belirli ID'ye sahip ödemeyi siler.
 
 Yanıt:
+```json
 {
   "message": "Ödeme başarıyla silindi."
 }
 
+```
 
+**Kullanıcı Uç Noktaları (User Endpoints)**
 
-Kullanıcı Uç Noktaları (User Endpoints)
-
-1. Tüm Kullanıcıları Getir
+1. **Tüm Kullanıcıları Getir**
 
 
 Uç Nokta: GET /api/User/GetUsers
@@ -364,6 +387,7 @@ Uç Nokta: GET /api/User/GetUsers
 Açıklama: Tüm kullanıcıları listeler.
 
 Yanıt:
+```json
 [
   {
     "id": "user-id",
@@ -374,9 +398,9 @@ Yanıt:
   }
 ]
 
+```
 
-
-2. Kullanıcı Oluştur
+2. **Kullanıcı Oluştur**
 
 
 Uç Nokta: POST /api/User/RegisterUser
@@ -384,15 +408,17 @@ Uç Nokta: POST /api/User/RegisterUser
 Açıklama: Yeni bir kullanıcı oluşturur.
 
 İstek Gövdesi:
+```json
 {
   "username": "kullanıcıadı",
   "password": "şifre",
   "email": "email@example.com",
   "phoneNumber": "telefon-numarası"
 }
-
+```
 
 Yanıt:
+```json
 {
   "id": "user-id",
   "username": "kullanıcıadı",
@@ -401,9 +427,9 @@ Yanıt:
   "phoneNumber": "telefon-numarası"
 }
 
+```
 
-
-3. ID'ye Göre Kullanıcı Getir
+3. **ID'ye Göre Kullanıcı Getir**
 
 
 Uç Nokta: GET /api/User/GetUser/{id}
@@ -411,6 +437,7 @@ Uç Nokta: GET /api/User/GetUser/{id}
 Açıklama: Belirli ID'ye sahip kullanıcıyı getirir.
 
 Yanıt:
+```json
 {
   "id": "user-id",
   "username": "kullanıcıadı",
@@ -418,10 +445,10 @@ Yanıt:
   "email": "email@example.com",
   "phoneNumber": "telefon-numarası"
 }
+```
 
 
-
-4. Kullanıcı Güncelle
+4. **Kullanıcı Güncelle**
 
 
 Uç Nokta: PUT /api/User/UpdateUser/{id}
@@ -429,6 +456,7 @@ Uç Nokta: PUT /api/User/UpdateUser/{id}
 Açıklama: Belirli ID'ye sahip kullanıcıyı günceller.
 
 İstek Gövdesi:
+```json
 {
   "username": "güncellenmiş-kullanıcıadı",
   "password": "güncellenmiş-şifre",
@@ -436,8 +464,9 @@ Açıklama: Belirli ID'ye sahip kullanıcıyı günceller.
   "phoneNumber": "güncellenmiş-telefon-numarası"
 }
 
-
+```
 Yanıt:
+```json
 {
   "id": "user-id",
   "username": "güncellenmiş-kullanıcıadı",
@@ -446,9 +475,9 @@ Yanıt:
   "phoneNumber": "güncellenmiş-telefon-numarası"
 }
 
+```
 
-
-5. Kullanıcı Sil
+5. **Kullanıcı Sil**
 
 
 Uç Nokta: DELETE /api/User/DeleteUser/{id}
@@ -456,13 +485,14 @@ Uç Nokta: DELETE /api/User/DeleteUser/{id}
 Açıklama: Belirli ID'ye sahip kullanıcıyı siler.
 
 Yanıt:
+```json
 {
   "message": "Kullanıcı başarıyla silindi."
 }
 
+```
 
-
-6. Kullanıcı Email İle Getir
+6. **Kullanıcı Email İle Getir**
 
 
 Uç Nokta: GET /api/User/GetUserByEmail/{email}
@@ -470,6 +500,7 @@ Uç Nokta: GET /api/User/GetUserByEmail/{email}
 Açıklama: Belirli email'e sahip kullanıcıyı getirir.
 
 Yanıt:
+```json
 {
   "id": "user-id",
   "username": "kullanıcıadı",
@@ -477,7 +508,7 @@ Yanıt:
   "email": "email@example.com",
   "phoneNumber": "telefon-numarası"
 }
-
+```
 
 
 
