@@ -4,16 +4,10 @@ using Microsoft.AspNetCore.Identity;
 
 namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
 {
-    public class RoleService : IRoleService
+    public class RoleService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager) : IRoleService
     {
-        private readonly UserManager<User> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-
-        public RoleService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
-        {
-            _userManager = userManager;
-            _roleManager = roleManager;
-        }
+        private readonly UserManager<User> _userManager = userManager;
+        private readonly RoleManager<IdentityRole> _roleManager = roleManager;
 
         public async Task<bool> CreateRoleAsync(string roleName)
         {

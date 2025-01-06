@@ -9,15 +9,10 @@ using InveonBootcamp.CompletionProject.DataAccessLayer.Repositories;
 
 namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
 {
-    public class CourseService : ICourseService
+    public class CourseService(IUnitOfWork unitOfWork, IMapper mapper) : ICourseService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        public CourseService(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+        private readonly IMapper _mapper = mapper;
 
         public async Task<IEnumerable<CourseDto>> GetAllCoursesAsync()
         {

@@ -9,16 +9,10 @@ using InveonBootcamp.CompletionProject.Core.ExceptionHandler.ExceptionClasses;
 
 namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
 {
-    public class PaymentService : IPaymentService
+    public class PaymentService(IUnitOfWork unitOfWork, IMapper mapper) : IPaymentService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-
-        public PaymentService(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+        private readonly IMapper _mapper = mapper;
 
         public async Task<IEnumerable<PaymentDto>> GetAllPaymentsAsync()
         {

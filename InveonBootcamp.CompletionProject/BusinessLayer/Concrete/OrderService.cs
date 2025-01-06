@@ -10,16 +10,10 @@ using InveonBootcamp.CompletionProject.Core.ExceptionHandler.ExceptionClasses;
 
 namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
 {
-    public class OrderService : IOrderService
+    public class OrderService(IUnitOfWork unitOfWork, IMapper mapper) : IOrderService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-
-        public OrderService(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+        private readonly IMapper _mapper = mapper;
 
         public async Task<OrderDto> AddOrderAsync(CreateOrderDto createOrderDto)
         {

@@ -7,14 +7,9 @@ using System.Text;
 
 namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
 {
-    public class TokenService : ITokenService
+    public class TokenService(IConfiguration configuration) : ITokenService
     {
-        private readonly IConfiguration _configuration;
-
-        public TokenService(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        private readonly IConfiguration _configuration = configuration;
 
         public Task<GenerateTokenResponse> GenerateToken(GenerateTokenRequest request)
         {

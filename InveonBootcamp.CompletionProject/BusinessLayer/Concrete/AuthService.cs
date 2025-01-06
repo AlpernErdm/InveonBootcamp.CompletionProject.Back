@@ -4,16 +4,11 @@ using InveonBootcamp.CompletionProject.Core.Dtos.JwtAuth;
 
 namespace InveonBootcamp.CompletionProject.BusinessLayer.Concrete
 {
-    public class AuthService : IAuthService
+    public class AuthService(IUserService userService, ITokenService tokenService) : IAuthService
     {
-        private readonly IUserService _userService;
-        private readonly ITokenService _tokenService;
+        private readonly IUserService _userService = userService;
+        private readonly ITokenService _tokenService = tokenService;
 
-        public AuthService(IUserService userService, ITokenService tokenService)
-        {
-            _userService = userService;
-            _tokenService = tokenService;
-        }
         public async Task<(bool IsAuthenticated, string Token, DateTime ExpiryDate)> LoginUserAsync(LoginDtoRequest request)
         {
             if (request == null)
