@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using InveonBootcamp.CompletionProject.Core;
 using InveonBootcamp.CompletionProject.Core.ExceptionHandler;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +16,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen();
+
+builder.Services.AddOpenApi();
 
 // Adding the DBContext to the service container
 builder.Services.AddDbContext<ApplicationDbContext>(opt =>
@@ -71,11 +74,15 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Middleware pipeline
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+app.MapOpenApi(); //swagger yerine openapi kullan
+app.MapScalarApiReference(); //görsellik saðlar
+
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseRouting();
